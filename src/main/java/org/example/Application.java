@@ -101,6 +101,14 @@ public class Application {
                 .filter(boardgame -> boardgame.getPlayers() == playerCount)
                 .toList();
     }
+//metodo per rimuovere un gioco dalla lista tramite id
 
-
+    public static void removeById(String id) {
+        for (Collection game : games) {
+            if (game.getId().equals(id)) {
+                games.remove(game);
+                return;
+            }
+        }
+    }
 }
