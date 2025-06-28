@@ -37,6 +37,23 @@ public class Application {
             System.out.println(e.getMessage());
         }
 
+        // ricerco i prezzi
+
+        System.out.print("Enter max price: ");
+        double maxPrice = scanner.nextDouble();
+
+        List<Collection> filteredGames = searchByPrice(maxPrice);
+
+        if (filteredGames.isEmpty()) {
+            System.out.println("No games found under €" + maxPrice);
+        } else {
+            System.out.println("Games under €" + maxPrice + ":");
+            for (Collection g : filteredGames) {
+                System.out.println(g.getTitle() + g.getPrice());
+            }
+        }
+
+
         scanner.close();
     }
 
@@ -52,7 +69,7 @@ public class Application {
         System.out.println("Game added: " + game.getTitle());
     }
 
-    //metofo ricerca per id
+    //metodo ricerca per id
     public static Collection searchById(String id) {
         for (Collection game : games) {
             if (game.getId().equalsIgnoreCase(id)) {
@@ -64,4 +81,26 @@ public class Application {
         throw new GameNotFoundException(id);
 
     }
+
+    //metodo ricerca per prezzo (lista di prezzi inferiori all'input che verrà inserito)
+    public static List<Collection> searchByPrice(double maxPrice) {
+        return games.stream()
+                .filter(game -> game.getPrice() < maxPrice)
+                .toList();
+    }
+
+    // metodo di ricerca per numero di giocatori
+    /*public static List<Collection> searchByPlayers(int player) {
+        return games.stream()
+                .filter(game -> game.getPlayers() == player)
+    }*/
+    public static List<Boardgames> searchByPlayers(int playerCount) {
+        return games.stream()
+                .filter(game -> game instanceof Boardgames)
+                .map(game -> (Boardgames) game)
+                .filter(boardgame -> boardgame.getPlayers() == playerCount)
+                .toList();
+    }
+
+
 }
