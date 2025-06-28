@@ -52,6 +52,38 @@ public class Application {
                 System.out.println(g.getTitle() + g.getPrice());
             }
         }
+//cerco gioco in base al numero di giocatori
+        System.out.print("Enter number of players: ");
+        String inputPlayers = scanner.nextLine();
+
+        int playersToSearch;
+
+        try {
+            playersToSearch = Integer.parseInt(inputPlayers);
+        } catch (NumberFormatException e) {
+            System.out.println("Please enter a valid number.");
+
+        }
+        /*System.out.print("Enter the number of players: ");
+        int playersToSearch = scanner.nextLine();
+
+        List<Boardgames> results = searchByPlayers(playersToSearch);
+
+        if (results.isEmpty()) {
+            System.out.println("No games found for " + playersToSearch + " players.");
+        } else {
+            System.out.println(" Games for " + playersToSearch + " players:");
+            for (Boardgames boardgame : results) {
+                System.out.println(boardgame.getTitle());
+            }
+        }*/
+
+
+        //elimino per id
+        System.out.print("Enter the ID of the game to remove: ");
+        String idToRemove = scanner.nextLine();
+
+        removeById(idToRemove);
 
 
         scanner.close();
